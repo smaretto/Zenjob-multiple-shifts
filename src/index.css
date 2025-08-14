@@ -2,51 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Zenjob Multi-Shift Booking Design System - Student-friendly & Modern */
+/* Zenjob Multi-Shift Booking Design System - Mobile-first & Accessible */
 
 @layer base {
   :root {
-    /* Base Colors - Clean and professional */
-    --background: 249 250 251; /* Very light gray */
-    --foreground: 226 29% 17%; /* Dark blue-gray */
+    /* Base Colors - Clean white background */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 0 0% 9%; /* Near black for WCAG AA compliance */
 
     /* Card System */
-    --card: 255 255 255; /* Pure white */
-    --card-foreground: 226 29% 17%;
-    --card-hover: 246 248 250; /* Subtle gray on hover */
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 0 0% 9%;
+    --card-hover: 0 0% 98%; /* Very subtle hover */
 
-    /* Brand Colors - Modern and trustworthy */
-    --primary: 239 84% 67%; /* Vibrant blue-purple */
-    --primary-foreground: 255 255 255;
-    --primary-glow: 239 84% 82%; /* Lighter version for effects */
+    /* Zenjob Brand Colors */
+    --primary: 200 100% 45%; /* Zenjob blue #009FE3 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 200 100% 85%; /* Lighter blue for effects */
 
     /* Success & Earnings - Green tones */
-    --success: 142 69% 58%; /* Fresh green */
-    --success-foreground: 255 255 255;
-    --success-light: 142 69% 88%; /* Light green background */
+    --success: 142 69% 45%; /* Darker green for better contrast */
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 69% 95%; /* Light green background */
 
-    /* Gamification - Energetic colors */
-    --gamification: 32 95% 64%; /* Bright orange */
-    --gamification-foreground: 255 255 255;
-    --gamification-light: 32 95% 92%; /* Light orange background */
+    /* Gamification - Warm yellow/orange accent */
+    --gamification: 38 92% 50%; /* Warm orange #FF8C00 */
+    --gamification-foreground: 0 0% 9%; /* Dark text for contrast */
+    --gamification-light: 38 92% 95%; /* Light orange background */
 
-    /* Warning & Streaks - Amber tones */
-    --warning: 45 93% 58%; /* Golden yellow */
-    --warning-foreground: 226 29% 17%;
-    --warning-light: 45 93% 94%;
+    /* Warning & Highlights - Warm yellow */
+    --warning: 45 100% 50%; /* Bright yellow for highlights */
+    --warning-foreground: 0 0% 9%; /* Dark text for contrast */
+    --warning-light: 45 100% 95%;
 
     /* Supporting Colors */
-    --secondary: 220 13% 96%;
-    --secondary-foreground: 226 29% 17%;
-    --muted: 220 13% 91%;
-    --muted-foreground: 215 25% 45%;
-    --accent: 239 84% 95%; /* Very light brand color */
-    --accent-foreground: 239 84% 25%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%; /* Darker for better contrast */
+    --accent: 200 100% 97%; /* Very light Zenjob blue */
+    --accent-foreground: 200 100% 25%;
 
     /* Interactive Elements */
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 239 84% 67%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 200 100% 45%;
 
     /* Utility */
     --destructive: 0 72% 51%;
@@ -113,7 +113,28 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px; /* WCAG AA compliance - minimum 16px */
+    line-height: 1.5;
+  }
+
+  /* Mobile-first responsive breakpoints */
+  .mobile-container {
+    max-width: 375px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* Typography scale for accessibility */
+  h1 { font-size: 24px; font-weight: 700; line-height: 1.3; }
+  h2 { font-size: 20px; font-weight: 600; line-height: 1.4; }
+  h3 { font-size: 18px; font-weight: 600; line-height: 1.4; }
+  
+  /* Minimum touch target size - 44px */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 

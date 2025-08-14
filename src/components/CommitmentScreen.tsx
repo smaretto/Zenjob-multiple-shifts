@@ -26,26 +26,27 @@ export default function CommitmentScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="mobile-container bg-background">
       {/* Header */}
       <div className="bg-card border-b sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
+        <div className="px-4 py-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate(`/job/${id}`)}>
-              <ArrowLeft className="w-4 h-4" />
+            <Button variant="ghost" size="icon" onClick={() => navigate(`/job/${id}`)}
+                    aria-label="Go back to job details" className="touch-target">
+              <ArrowLeft className="w-5 h-5" />
             </Button>
-            <div className="flex items-center gap-3">
-              <img src={job.icon} alt={job.company} className="w-10 h-10 rounded-lg object-cover" />
-              <div>
-                <h1 className="text-xl font-semibold">Confirm Booking</h1>
-                <p className="text-muted-foreground">{job.title} • {job.company}</p>
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <img src={job.icon} alt={`${job.company} logo`} className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
+              <div className="min-w-0">
+                <h1 className="text-lg font-semibold leading-tight">Confirm Booking</h1>
+                <p className="text-muted-foreground text-sm truncate">{job.title} • {job.company}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6 max-w-2xl">
+      <div className="px-4 py-6 pb-24">
         <div className="space-y-6">
           {/* AI Micro-scheduling Check */}
           <Card className="p-6">
@@ -216,22 +217,27 @@ export default function CommitmentScreen() {
           </Card>
 
           {/* Action Buttons */}
-          <div className="flex gap-3">
-            <Button 
-              variant="outline" 
-              className="flex-1"
-              onClick={() => navigate(`/job/${id}`)}
-            >
-              Review Details
-            </Button>
-            <Button 
-              className="flex-1 btn-success" 
-              size="lg"
-              disabled={!confirmationChecked}
-              onClick={() => navigate(`/confirmation/${id}`)}
-            >
-              Confirm Booking • €{job.totalEarnings}
-            </Button>
+          <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
+            <div className="mobile-container">
+              <div className="flex gap-3">
+                <Button 
+                  variant="outline" 
+                  className="flex-1 touch-target"
+                  onClick={() => navigate(`/job/${id}`)}
+                >
+                  Review
+                </Button>
+                <Button 
+                  className="flex-1" 
+                  size="lg"
+                  variant="success"
+                  disabled={!confirmationChecked}
+                  onClick={() => navigate(`/confirmation/${id}`)}
+                >
+                  Confirm €{job.totalEarnings}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
