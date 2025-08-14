@@ -1,14 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useLocation, useParams } from "react-router-dom";
+import DiscoveryScreen from "@/components/DiscoveryScreen";
+import ReviewScreen from "@/components/ReviewScreen";
+import CommitmentScreen from "@/components/CommitmentScreen";
+import ConfirmationScreen from "@/components/ConfirmationScreen";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const location = useLocation();
+  const params = useParams();
+
+  // Route to appropriate screen based on URL
+  if (location.pathname === "/" || location.pathname === "/discovery") {
+    return <DiscoveryScreen />;
+  }
+  
+  if (location.pathname.startsWith("/job/")) {
+    return <ReviewScreen />;
+  }
+  
+  if (location.pathname.startsWith("/commitment/")) {
+    return <CommitmentScreen />;
+  }
+  
+  if (location.pathname.startsWith("/confirmation/")) {
+    return <ConfirmationScreen />;
+  }
+
+  // Fallback
+  return <DiscoveryScreen />;
 };
 
 export default Index;
