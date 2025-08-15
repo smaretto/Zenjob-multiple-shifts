@@ -7,13 +7,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Shield, Brain, TrendingUp, Users, Gift, AlertTriangle, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
-
 export default function CommitmentScreen() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const {
+    id
+  } = useParams();
   const [inviteFriend, setInviteFriend] = useState(false);
   const [confirmationChecked, setConfirmationChecked] = useState(false);
-
   const job = {
     title: "Barista Assistant",
     company: "Central Café",
@@ -24,15 +24,12 @@ export default function CommitmentScreen() {
     startDate: "Tomorrow",
     endDate: "Friday"
   };
-
-  return (
-    <div className="mobile-container bg-background">
+  return <div className="mobile-container bg-background">
       {/* Header */}
       <div className="bg-card border-b sticky top-0 z-10">
         <div className="px-4 py-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate(`/job/${id}`)}
-                    aria-label="Go back to job details" className="touch-target">
+            <Button variant="ghost" size="icon" onClick={() => navigate(`/job/${id}`)} aria-label="Go back to job details" className="touch-target">
               <ArrowLeft className="w-5 h-5" />
             </Button>
             <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -92,10 +89,7 @@ export default function CommitmentScreen() {
                 <div className="w-2 h-2 bg-success rounded-full"></div>
                 <span className="text-sm">No penalty for first-time cancellations</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-success rounded-full"></div>
-                <span className="text-sm">Full refund if company cancels</span>
-              </div>
+              
             </div>
           </Card>
 
@@ -117,9 +111,7 @@ export default function CommitmentScreen() {
                 <span className="font-semibold text-primary">{job.successRate}%</span>
               </div>
               <Progress value={job.successRate} className="h-3" />
-              <p className="text-xs text-muted-foreground">
-                Students with similar profiles rated this role 4.2+ stars
-              </p>
+              <p className="text-xs text-muted-foreground">Students with similar profiles were rated on average 4.2+ stars</p>
             </div>
           </Card>
 
@@ -141,7 +133,7 @@ export default function CommitmentScreen() {
                   <span className="font-medium text-gamification-foreground">Completion Bonus</span>
                   <span className="text-xl font-bold text-gamification">€10</span>
                 </div>
-                <Progress value={0} className="h-2 mb-2" />
+                <Progress value={0} className="h-2 mb-2 bg-white" />
                 <p className="text-xs text-gamification-foreground">Complete all 5 shifts to unlock</p>
               </div>
               
@@ -168,32 +160,24 @@ export default function CommitmentScreen() {
                 <h3 className="font-semibold">Invite a Friend</h3>
                 <p className="text-sm text-muted-foreground">Earn €5 when they complete their first shift</p>
               </div>
-              <Checkbox 
-                checked={inviteFriend}
-                onCheckedChange={(checked) => setInviteFriend(checked as boolean)}
-              />
+              <Checkbox checked={inviteFriend} onCheckedChange={checked => setInviteFriend(checked as boolean)} />
             </div>
             
-            {inviteFriend && (
-              <div className="bg-warning-light p-4 rounded-lg animate-slide-up">
+            {inviteFriend && <div className="bg-warning-light p-4 rounded-lg animate-slide-up">
                 <p className="text-sm text-warning-foreground font-medium mb-2">
                   Perfect! We'll send you a referral link after booking.
                 </p>
                 <p className="text-xs text-warning-foreground">
                   Your friend gets priority access to similar shifts, and you both earn bonus rewards.
                 </p>
-              </div>
-            )}
+              </div>}
           </Card>
 
           {/* Final Confirmation */}
           <Card className="p-6 border-primary/20">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Checkbox 
-                  checked={confirmationChecked}
-                  onCheckedChange={(checked) => setConfirmationChecked(checked as boolean)}
-                />
+                <Checkbox checked={confirmationChecked} onCheckedChange={checked => setConfirmationChecked(checked as boolean)} />
                 <div>
                   <p className="text-sm font-medium">I confirm my commitment to all 5 shifts</p>
                   <p className="text-xs text-muted-foreground">
@@ -222,23 +206,13 @@ export default function CommitmentScreen() {
       {/* Sticky bottom buttons */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
         <div className="flex gap-3">
-          <Button 
-            variant="outline" 
-            className="flex-1 touch-target"
-            onClick={() => navigate(`/job/${id}`)}
-          >
+          <Button variant="outline" className="flex-1 touch-target" onClick={() => navigate(`/job/${id}`)}>
             Review
           </Button>
-          <Button 
-            className="flex-1 touch-target" 
-            size="lg"
-            disabled={!confirmationChecked}
-            onClick={() => navigate(`/confirmation/${id}`)}
-          >
+          <Button className="flex-1 touch-target" size="lg" disabled={!confirmationChecked} onClick={() => navigate(`/confirmation/${id}`)}>
             Confirm €{job.totalEarnings}
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
