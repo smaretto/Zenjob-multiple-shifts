@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Calendar, CheckCircle, Gift, Book, Award, TrendingUp, Clock, MapPin, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
+import retailIcon from "@/assets/retail-icon.jpg";
+import officeIcon from "@/assets/office-icon.jpg";
 
 export default function ConfirmationScreen() {
   const navigate = useNavigate();
@@ -22,29 +24,82 @@ export default function ConfirmationScreen() {
     };
   }, []);
 
-  const job = {
-    title: "Barista Assistant",
-    company: "Central Café",
-    totalShifts: 5,
-    totalEarnings: 400,
-    icon: coffeeIcon,
-    manager: "Anna S.",
-    address: "Friedrichstraße 123, 10117 Berlin",
-    phone: "+49 30 12345678",
-    shifts: [
-      { date: "Mon, Dec 16", time: "7:00-11:00 AM", status: "next" },
-      { date: "Tue, Dec 17", time: "7:00-11:00 AM", status: "upcoming" },
-      { date: "Wed, Dec 18", time: "7:00-11:00 AM", status: "upcoming" },
-      { date: "Thu, Dec 19", time: "7:00-11:00 AM", status: "upcoming" },
-      { date: "Fri, Dec 20", time: "7:00-11:00 AM", status: "upcoming" }
-    ],
-    prepTips: [
+  const jobsData = {
+    "coffee-central": {
+      title: "Barista Assistant",
+      company: "Central Café",
+      totalShifts: 5,
+      totalEarnings: 400,
+      icon: coffeeIcon,
+      manager: "Anna S.",
+      address: "Friedrichstraße 123, 10117 Berlin",
+      phone: "+49 30 12345678",
+      shifts: [
+        { date: "Mon, Dec 16", time: "7:00-11:00 AM", status: "next" },
+        { date: "Tue, Dec 17", time: "7:00-11:00 AM", status: "upcoming" },
+        { date: "Wed, Dec 18", time: "7:00-11:00 AM", status: "upcoming" },
+        { date: "Thu, Dec 19", time: "7:00-11:00 AM", status: "upcoming" },
+        { date: "Fri, Dec 20", time: "7:00-11:00 AM", status: "upcoming" }
+      ]
+    },
+    "retail-fashion": {
+      title: "Sales Associate",
+      company: "Urban Style",
+      totalShifts: 4,
+      totalEarnings: 364,
+      icon: retailIcon,
+      manager: "Marcus L.",
+      address: "Kastanienallee 45, 10435 Berlin",
+      phone: "+49 30 87654321",
+      shifts: [
+        { date: "Sat, Dec 14", time: "10:00-19:00 PM", status: "next" },
+        { date: "Sun, Dec 15", time: "10:00-19:00 PM", status: "upcoming" },
+        { date: "Sat, Dec 21", time: "10:00-19:00 PM", status: "upcoming" },
+        { date: "Sun, Dec 22", time: "10:00-19:00 PM", status: "upcoming" }
+      ]
+    },
+    "office-admin": {
+      title: "Administrative Support",
+      company: "TechStart GmbH",
+      totalShifts: 3,
+      totalEarnings: 336,
+      icon: officeIcon,
+      manager: "Sarah K.",
+      address: "Oranienstraße 67, 10969 Berlin",
+      phone: "+49 30 11223344",
+      shifts: [
+        { date: "Wed, Dec 18", time: "14:00-22:00 PM", status: "next" },
+        { date: "Thu, Dec 19", time: "14:00-22:00 PM", status: "upcoming" },
+        { date: "Fri, Dec 20", time: "14:00-22:00 PM", status: "upcoming" }
+      ]
+    }
+  };
+
+  const job = jobsData[id as keyof typeof jobsData] || jobsData["coffee-central"];
+
+  // Add prep tips for each job
+  const prepTips = {
+    "coffee-central": [
       "Arrive 10 minutes early for your first day",
       "Wear comfortable black clothing",
       "Bring a water bottle - it gets busy!",
       "Ask Anna about the morning rush procedures"
+    ],
+    "retail-fashion": [
+      "Dress stylishly to represent the brand",
+      "Familiarize yourself with current fashion trends",
+      "Practice your customer service skills",
+      "Ask Marcus about store policies and procedures"
+    ],
+    "office-admin": [
+      "Bring a notebook for taking notes",
+      "Dress business casual",
+      "Be ready to use Microsoft Office",
+      "Ask Sarah about project priorities on day one"
     ]
   };
+
+  const currentJobPrepTips = prepTips[id as keyof typeof prepTips] || prepTips["coffee-central"];
 
   return (
     <div className="mobile-container bg-background">
@@ -146,7 +201,7 @@ export default function ConfirmationScreen() {
             </h3>
             
             <div className="space-y-3 mb-4">
-              {job.prepTips.map((tip, index) => (
+              {currentJobPrepTips.map((tip, index) => (
                 <div key={index} className="flex items-start gap-3 p-3 bg-accent rounded-lg">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                   <span className="text-sm">{tip}</span>

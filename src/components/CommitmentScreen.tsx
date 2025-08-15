@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Shield, Brain, TrendingUp, Users, Gift, AlertTriangle, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
+import retailIcon from "@/assets/retail-icon.jpg";
+import officeIcon from "@/assets/office-icon.jpg";
 export default function CommitmentScreen() {
   const navigate = useNavigate();
   const {
@@ -14,16 +16,41 @@ export default function CommitmentScreen() {
   } = useParams();
   const [inviteFriend, setInviteFriend] = useState(false);
   const [confirmationChecked, setConfirmationChecked] = useState(false);
-  const job = {
-    title: "Barista Assistant",
-    company: "Central Café",
-    totalShifts: 5,
-    totalEarnings: 400,
-    icon: coffeeIcon,
-    successRate: 85,
-    startDate: "Tomorrow",
-    endDate: "Friday"
+  
+  const jobsData = {
+    "coffee-central": {
+      title: "Barista Assistant",
+      company: "Central Café",
+      totalShifts: 5,
+      totalEarnings: 400,
+      icon: coffeeIcon,
+      successRate: 85,
+      startDate: "Tomorrow",
+      endDate: "Friday"
+    },
+    "retail-fashion": {
+      title: "Sales Associate",
+      company: "Urban Style",
+      totalShifts: 4,
+      totalEarnings: 364,
+      icon: retailIcon,
+      successRate: 78,
+      startDate: "This Saturday",
+      endDate: "Next Sunday"
+    },
+    "office-admin": {
+      title: "Administrative Support",
+      company: "TechStart GmbH",
+      totalShifts: 3,
+      totalEarnings: 336,
+      icon: officeIcon,
+      successRate: 92,
+      startDate: "Wednesday",
+      endDate: "Friday"
+    }
   };
+
+  const job = jobsData[id as keyof typeof jobsData] || jobsData["coffee-central"];
   return <div className="mobile-container bg-background">
       {/* Header */}
       <div className="bg-card border-b sticky top-0 z-10">

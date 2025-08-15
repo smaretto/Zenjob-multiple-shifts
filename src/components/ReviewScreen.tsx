@@ -6,36 +6,87 @@ import { Separator } from "@/components/ui/separator";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, MapPin, Clock, Star, TrendingUp, Users, MessageCircle, Calendar, Award, Zap } from "lucide-react";
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
+import retailIcon from "@/assets/retail-icon.jpg";
+import officeIcon from "@/assets/office-icon.jpg";
 
 export default function ReviewScreen() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Mock data for the selected job
-  const job = {
-    id: "coffee-central",
-    title: "Barista Assistant",
-    company: "Central Café",
-    location: "Mitte, Berlin",
-    hourlyRate: 12.5,
-    totalShifts: 5,
-    totalEarnings: 400,
-    fitScore: 92,
-    icon: coffeeIcon,
-    shifts: [
-      { date: "Mon, Dec 16", time: "7:00-11:00 AM", day: "Tomorrow" },
-      { date: "Tue, Dec 17", time: "7:00-11:00 AM", day: "Tuesday" },
-      { date: "Wed, Dec 18", time: "7:00-11:00 AM", day: "Wednesday" },
-      { date: "Thu, Dec 19", time: "7:00-11:00 AM", day: "Thursday" },
-      { date: "Fri, Dec 20", time: "7:00-11:00 AM", day: "Friday" }
-    ],
-    manager: "Anna S.",
-    rating: 4.8,
-    reviews: 127,
-    commuteTime: "12 min",
-    benefits: ["Flexible cancellation", "Same manager", "Morning shifts", "Free coffee"],
-    description: "Join our friendly café team for the morning rush! Perfect for students with early availability."
+  // Mock data for all jobs
+  const jobsData = {
+    "coffee-central": {
+      id: "coffee-central",
+      title: "Barista Assistant",
+      company: "Central Café",
+      location: "Mitte, Berlin",
+      hourlyRate: 12.5,
+      totalShifts: 5,
+      totalEarnings: 400,
+      fitScore: 92,
+      icon: coffeeIcon,
+      shifts: [
+        { date: "Mon, Dec 16", time: "7:00-11:00 AM", day: "Tomorrow" },
+        { date: "Tue, Dec 17", time: "7:00-11:00 AM", day: "Tuesday" },
+        { date: "Wed, Dec 18", time: "7:00-11:00 AM", day: "Wednesday" },
+        { date: "Thu, Dec 19", time: "7:00-11:00 AM", day: "Thursday" },
+        { date: "Fri, Dec 20", time: "7:00-11:00 AM", day: "Friday" }
+      ],
+      manager: "Anna S.",
+      rating: 4.8,
+      reviews: 127,
+      commuteTime: "12 min",
+      benefits: ["Flexible cancellation", "Same manager", "Morning shifts", "Free coffee"],
+      description: "Join our friendly café team for the morning rush! Perfect for students with early availability."
+    },
+    "retail-fashion": {
+      id: "retail-fashion",
+      title: "Sales Associate",
+      company: "Urban Style",
+      location: "Prenzlauer Berg, Berlin",
+      hourlyRate: 13.0,
+      totalShifts: 4,
+      totalEarnings: 364,
+      fitScore: 88,
+      icon: retailIcon,
+      shifts: [
+        { date: "Sat, Dec 14", time: "10:00-19:00 PM", day: "This Saturday" },
+        { date: "Sun, Dec 15", time: "10:00-19:00 PM", day: "Sunday" },
+        { date: "Sat, Dec 21", time: "10:00-19:00 PM", day: "Next Saturday" },
+        { date: "Sun, Dec 22", time: "10:00-19:00 PM", day: "Next Sunday" }
+      ],
+      manager: "Marcus L.",
+      rating: 4.7,
+      reviews: 89,
+      commuteTime: "18 min",
+      benefits: ["Employee discount", "Flexible schedule", "Weekend premium", "Team events"],
+      description: "Help customers find their perfect style in our trendy fashion store. Great for building sales skills!"
+    },
+    "office-admin": {
+      id: "office-admin",
+      title: "Administrative Support",
+      company: "TechStart GmbH",
+      location: "Kreuzberg, Berlin",
+      hourlyRate: 14.0,
+      totalShifts: 3,
+      totalEarnings: 336,
+      fitScore: 85,
+      icon: officeIcon,
+      shifts: [
+        { date: "Wed, Dec 18", time: "14:00-22:00 PM", day: "Wednesday" },
+        { date: "Thu, Dec 19", time: "14:00-22:00 PM", day: "Thursday" },
+        { date: "Fri, Dec 20", time: "14:00-22:00 PM", day: "Friday" }
+      ],
+      manager: "Sarah K.",
+      rating: 4.9,
+      reviews: 156,
+      commuteTime: "15 min",
+      benefits: ["Tech environment", "Career development", "Quiet workspace", "Modern office"],
+      description: "Support our growing startup with administrative tasks. Perfect for gaining experience in tech!"
+    }
   };
+
+  const job = jobsData[id as keyof typeof jobsData] || jobsData["coffee-central"];
 
   return (
     <div className="mobile-container bg-background">
