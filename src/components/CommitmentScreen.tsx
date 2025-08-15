@@ -216,29 +216,27 @@ export default function CommitmentScreen() {
             </div>
           </Card>
 
-          {/* Action Buttons */}
-          <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
-            <div className="mobile-container">
-              <div className="flex gap-3">
-                <Button 
-                  variant="outline" 
-                  className="flex-1 touch-target"
-                  onClick={() => navigate(`/job/${id}`)}
-                >
-                  Review
-                </Button>
-                <Button 
-                  className="flex-1" 
-                  size="lg"
-                  variant="success"
-                  disabled={!confirmationChecked}
-                  onClick={() => navigate(`/confirmation/${id}`)}
-                >
-                  Confirm €{job.totalEarnings}
-                </Button>
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+
+      {/* Sticky bottom buttons */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
+        <div className="flex gap-3">
+          <Button 
+            variant="outline" 
+            className="flex-1 touch-target"
+            onClick={() => navigate(`/job/${id}`)}
+          >
+            Review
+          </Button>
+          <Button 
+            className="flex-1 touch-target" 
+            size="lg"
+            disabled={!confirmationChecked}
+            onClick={() => navigate(`/confirmation/${id}`)}
+          >
+            Confirm €{job.totalEarnings}
+          </Button>
         </div>
       </div>
     </div>

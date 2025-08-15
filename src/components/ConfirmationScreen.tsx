@@ -203,23 +203,21 @@ export default function ConfirmationScreen() {
               </div>
             </div>
           </Card>
+        </div>
+      </div>
 
-          {/* Fixed bottom actions */}
-          <div className="fixed bottom-0 left-0 right-0 bg-background border-t p-4">
-            <div className="mobile-container">
-              <div className="flex gap-3">
-                <Button className="flex-1 touch-target" variant="outline">
-                  Add to Calendar
-                </Button>
-                <Button 
-                  className="flex-1" 
-                  onClick={() => navigate('/discovery')}
-                >
-                  Find More Jobs
-                </Button>
-              </div>
-            </div>
-          </div>
+      {/* Sticky bottom buttons */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
+        <div className="flex gap-3">
+          <Button className="flex-1 touch-target" variant="outline">
+            Add to Calendar
+          </Button>
+          <Button 
+            className="flex-1 touch-target" 
+            onClick={() => navigate('/discovery')}
+          >
+            Find More Jobs
+          </Button>
         </div>
       </div>
     </div>
