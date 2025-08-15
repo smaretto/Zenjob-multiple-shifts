@@ -15,10 +15,10 @@
     --card-foreground: 0 0% 9%;
     --card-hover: 0 0% 98%; /* Very subtle hover */
 
-    /* Zenjob Brand Colors */
-    --primary: 200 100% 45%; /* Zenjob blue #009FE3 */
+    /* Brand Colors */
+    --primary: 238 100% 59%; /* New blue #2D31FF */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 200 100% 85%; /* Lighter blue for effects */
+    --primary-glow: 238 100% 85%; /* Lighter blue for effects */
 
     /* Success & Earnings - Green tones */
     --success: 142 69% 45%; /* Darker green for better contrast */
