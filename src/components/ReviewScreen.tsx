@@ -8,10 +8,11 @@ import { ArrowLeft, MapPin, Clock, Star, TrendingUp, Users, MessageCircle, Calen
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
 import retailIcon from "@/assets/retail-icon.jpg";
 import officeIcon from "@/assets/office-icon.jpg";
-
 export default function ReviewScreen() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const {
+    id
+  } = useParams();
 
   // Mock data for all jobs
   const jobsData = {
@@ -25,13 +26,27 @@ export default function ReviewScreen() {
       totalEarnings: 400,
       fitScore: 92,
       icon: coffeeIcon,
-      shifts: [
-        { date: "Mon, Dec 16", time: "7:00-11:00 AM", day: "Tomorrow" },
-        { date: "Tue, Dec 17", time: "7:00-11:00 AM", day: "Tuesday" },
-        { date: "Wed, Dec 18", time: "7:00-11:00 AM", day: "Wednesday" },
-        { date: "Thu, Dec 19", time: "7:00-11:00 AM", day: "Thursday" },
-        { date: "Fri, Dec 20", time: "7:00-11:00 AM", day: "Friday" }
-      ],
+      shifts: [{
+        date: "Mon, Dec 16",
+        time: "7:00-11:00 AM",
+        day: "Tomorrow"
+      }, {
+        date: "Tue, Dec 17",
+        time: "7:00-11:00 AM",
+        day: "Tuesday"
+      }, {
+        date: "Wed, Dec 18",
+        time: "7:00-11:00 AM",
+        day: "Wednesday"
+      }, {
+        date: "Thu, Dec 19",
+        time: "7:00-11:00 AM",
+        day: "Thursday"
+      }, {
+        date: "Fri, Dec 20",
+        time: "7:00-11:00 AM",
+        day: "Friday"
+      }],
       manager: "Anna S.",
       rating: 4.8,
       reviews: 127,
@@ -49,12 +64,23 @@ export default function ReviewScreen() {
       totalEarnings: 364,
       fitScore: 88,
       icon: retailIcon,
-      shifts: [
-        { date: "Sat, Dec 14", time: "10:00-19:00 PM", day: "This Saturday" },
-        { date: "Sun, Dec 15", time: "10:00-19:00 PM", day: "Sunday" },
-        { date: "Sat, Dec 21", time: "10:00-19:00 PM", day: "Next Saturday" },
-        { date: "Sun, Dec 22", time: "10:00-19:00 PM", day: "Next Sunday" }
-      ],
+      shifts: [{
+        date: "Sat, Dec 14",
+        time: "10:00-19:00 PM",
+        day: "This Saturday"
+      }, {
+        date: "Sun, Dec 15",
+        time: "10:00-19:00 PM",
+        day: "Sunday"
+      }, {
+        date: "Sat, Dec 21",
+        time: "10:00-19:00 PM",
+        day: "Next Saturday"
+      }, {
+        date: "Sun, Dec 22",
+        time: "10:00-19:00 PM",
+        day: "Next Sunday"
+      }],
       manager: "Marcus L.",
       rating: 4.7,
       reviews: 89,
@@ -72,11 +98,19 @@ export default function ReviewScreen() {
       totalEarnings: 336,
       fitScore: 85,
       icon: officeIcon,
-      shifts: [
-        { date: "Wed, Dec 18", time: "14:00-22:00 PM", day: "Wednesday" },
-        { date: "Thu, Dec 19", time: "14:00-22:00 PM", day: "Thursday" },
-        { date: "Fri, Dec 20", time: "14:00-22:00 PM", day: "Friday" }
-      ],
+      shifts: [{
+        date: "Wed, Dec 18",
+        time: "14:00-22:00 PM",
+        day: "Wednesday"
+      }, {
+        date: "Thu, Dec 19",
+        time: "14:00-22:00 PM",
+        day: "Thursday"
+      }, {
+        date: "Fri, Dec 20",
+        time: "14:00-22:00 PM",
+        day: "Friday"
+      }],
       manager: "Sarah K.",
       rating: 4.9,
       reviews: 156,
@@ -85,11 +119,8 @@ export default function ReviewScreen() {
       description: "Support our growing startup with administrative tasks. Perfect for gaining experience in tech!"
     }
   };
-
   const job = jobsData[id as keyof typeof jobsData] || jobsData["coffee-central"];
-
-  return (
-    <div className="mobile-container bg-background">
+  return <div className="mobile-container bg-background">
       {/* Header */}
       <div className="bg-card border-b sticky top-0 z-10">
         <div className="px-4 py-4">
@@ -212,8 +243,7 @@ export default function ReviewScreen() {
             Your 5-Day Journey
           </h3>
           <div className="space-y-3">
-            {job.shifts.map((shift, index) => (
-              <div key={index} className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
+            {job.shifts.map((shift, index) => <div key={index} className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
                 <div className="w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
                   {index + 1}
                 </div>
@@ -224,8 +254,7 @@ export default function ReviewScreen() {
                 <div className="text-xs font-medium text-primary flex-shrink-0">{shift.day}</div>
                 {index === 0 && <Badge className="streak-badge text-xs flex-shrink-0">Start</Badge>}
                 {index === job.shifts.length - 1 && <Badge variant="outline" className="text-xs flex-shrink-0">€10 Bonus</Badge>}
-              </div>
-            ))}
+              </div>)}
           </div>
         </Card>
 
@@ -242,11 +271,11 @@ export default function ReviewScreen() {
             </div>
             <div className="bg-muted p-3 rounded-lg">
               <p className="text-sm font-medium mb-1">What if I'm running late?</p>
-              <p className="text-xs text-muted-foreground">Call the café directly. Most students arrive 5-10 min early.</p>
+              <p className="text-xs text-muted-foreground">Call the office directly. Most students arrive 5-10 min early.</p>
             </div>
             <div className="bg-muted p-3 rounded-lg">
               <p className="text-sm font-medium mb-1">Dress code?</p>
-              <p className="text-xs text-muted-foreground">Casual black clothing. Apron provided by café.</p>
+              <p className="text-xs text-muted-foreground">Casual smart. Something classic for the office.</p>
             </div>
           </div>
         </Card>
@@ -255,26 +284,19 @@ export default function ReviewScreen() {
         <Card className="p-4 mb-6">
           <h3 className="font-semibold mb-4">What's included</h3>
           <div className="space-y-2">
-            {job.benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center gap-2 text-sm">
+            {job.benefits.map((benefit, index) => <div key={index} className="flex items-center gap-2 text-sm">
                 <div className="w-1.5 h-1.5 bg-success rounded-full flex-shrink-0"></div>
                 {benefit}
-              </div>
-            ))}
+              </div>)}
           </div>
         </Card>
       </div>
 
       {/* Sticky bottom button */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
-        <Button 
-          className="w-full touch-target" 
-          size="lg"
-          onClick={() => navigate(`/commitment/${id}`)}
-        >
+        <Button className="w-full touch-target" size="lg" onClick={() => navigate(`/commitment/${id}`)}>
           Book All 5 Shifts
         </Button>
       </div>
-    </div>
-  );
+    </div>;
 }
