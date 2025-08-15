@@ -8,6 +8,8 @@ const Index = () => {
   const location = useLocation();
   const params = useParams();
 
+  console.log("Current location:", location.pathname); // Debug log
+  
   // Route to appropriate screen based on URL
   if (location.pathname === "/" || location.pathname === "/discovery") {
     return <DiscoveryScreen />;
