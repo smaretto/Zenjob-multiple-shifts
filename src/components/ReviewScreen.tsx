@@ -146,6 +146,18 @@ export default function ReviewScreen() {
       </div>
 
       <div className="px-4 py-6 pb-20">
+        {/* Location Section */}
+        <Card className="p-4 mb-6">
+          <h2 className="text-lg font-semibold mb-4">Location</h2>
+          <div className="bg-muted h-[100px] rounded-lg mb-3 flex items-center justify-center">
+            <MapPin className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <div>
+            <h3 className="font-medium">{job.company}</h3>
+            <p className="text-sm text-muted-foreground">{job.location}</p>
+          </div>
+        </Card>
+
         {/* Adaptive Job Card */}
         <Card className="p-4 mb-6">
           <div className="flex items-center gap-2 mb-4">
@@ -265,18 +277,54 @@ export default function ReviewScreen() {
             AI Assistant
           </h3>
           <div className="space-y-3">
-            <div className="bg-muted p-3 rounded-lg">
-              <p className="text-sm font-medium mb-1">Will I have the same manager?</p>
-              <p className="text-xs text-muted-foreground">Yes, Anna S. for all 5 days. She's rated 4.8⭐ by students.</p>
-            </div>
-            <div className="bg-muted p-3 rounded-lg">
-              <p className="text-sm font-medium mb-1">What if I'm running late?</p>
-              <p className="text-xs text-muted-foreground">Call the office directly. Most students arrive 5-10 min early.</p>
-            </div>
-            <div className="bg-muted p-3 rounded-lg">
-              <p className="text-sm font-medium mb-1">Dress code?</p>
-              <p className="text-xs text-muted-foreground">Casual smart. Something classic for the office.</p>
-            </div>
+            {job.id === "coffee-central" && (
+              <>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">Will I have the same manager?</p>
+                  <p className="text-xs text-muted-foreground">Yes, Anna S. for all 5 days. She's rated 4.8⭐ by students.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">What if I'm running late?</p>
+                  <p className="text-xs text-muted-foreground">Call the café directly. Most baristas arrive 5-10 min early.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">Is coffee experience required?</p>
+                  <p className="text-xs text-muted-foreground">No experience needed! Full training provided on your first day.</p>
+                </div>
+              </>
+            )}
+            {job.id === "retail-fashion" && (
+              <>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">Do I get employee discounts?</p>
+                  <p className="text-xs text-muted-foreground">Yes! 30% discount on all Urban Style products during your shifts.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">What's the dress code?</p>
+                  <p className="text-xs text-muted-foreground">Stylish casual wear that represents our brand. Think trendy but professional.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">How busy are weekends?</p>
+                  <p className="text-xs text-muted-foreground">Weekends are our peak times - expect steady customer flow and higher earnings potential.</p>
+                </div>
+              </>
+            )}
+            {job.id === "office-admin" && (
+              <>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">What software will I use?</p>
+                  <p className="text-xs text-muted-foreground">Mainly Microsoft Office and Slack. Training provided for any startup-specific tools.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">Is it a quiet work environment?</p>
+                  <p className="text-xs text-muted-foreground">Yes, perfect for focused work. Open office but respectful of concentration time.</p>
+                </div>
+                <div className="bg-muted p-3 rounded-lg">
+                  <p className="text-sm font-medium mb-1">Career development opportunities?</p>
+                  <p className="text-xs text-muted-foreground">Excellent networking with tech professionals and potential for future internships.</p>
+                </div>
+              </>
+            )}
           </div>
         </Card>
 
@@ -294,8 +342,8 @@ export default function ReviewScreen() {
 
       {/* Sticky bottom button */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
-        <Button className="w-full touch-target" size="lg" onClick={() => navigate(`/commitment/${id}`)}>
-          Book All 5 Shifts
+        <Button className="w-full touch-target rounded-full" size="lg" onClick={() => navigate(`/commitment/${id}`)}>
+          Book All {job.totalShifts} Shifts
         </Button>
       </div>
     </div>;

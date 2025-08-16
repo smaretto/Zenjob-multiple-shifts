@@ -109,10 +109,10 @@ export default function ConfirmationScreen() {
           <div className={`text-center transition-all duration-1000 ${animationStage >= 1 ? 'animate-scale-in' : 'opacity-0'}`}>
             <div className="flex items-center justify-center gap-2 mb-2">
               <CheckCircle className="w-6 h-6" aria-hidden="true" />
-              <h1 className="text-xl font-bold">Booking Confirmed!</h1>
+              <h1 className="text-xl font-bold">Application Submitted</h1>
             </div>
             <p className="text-success-foreground/90 text-sm">
-              You booked 5 shifts in a row — consistency pays off! 🎉
+              The employer must validate your application and it's not done yet.
             </p>
           </div>
         </div>
@@ -154,11 +154,27 @@ export default function ConfirmationScreen() {
             </div>
           </Card>
 
+          {/* Application Status */}
+          <Card className="p-4">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-base">
+              <Clock className="w-5 h-5 text-warning" aria-hidden="true" />
+              Application Pending
+            </h3>
+            <div className="bg-warning-light p-3 rounded-lg mb-4">
+              <p className="text-sm text-warning-foreground font-medium mb-1">
+                Average review time: 2-4 hours
+              </p>
+              <p className="text-xs text-warning-foreground">
+                {job.company} typically responds quickly. You'll get a notification once they review your application.
+              </p>
+            </div>
+          </Card>
+
           {/* Progress Tracker */}
           <Card className="p-4">
             <h3 className="font-semibold mb-4 flex items-center gap-2 text-base">
               <TrendingUp className="w-5 h-5 text-primary" aria-hidden="true" />
-              Your Progress Tracker
+              Your Applied Shifts
             </h3>
             
             <div className="space-y-3">
@@ -263,17 +279,12 @@ export default function ConfirmationScreen() {
 
       {/* Sticky bottom buttons */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
-        <div className="flex gap-3">
-          <Button className="flex-1 touch-target" variant="outline">
-            Add to Calendar
-          </Button>
-          <Button 
-            className="flex-1 touch-target" 
-            onClick={() => navigate('/discovery')}
-          >
-            Find More Jobs
-          </Button>
-        </div>
+        <Button 
+          className="w-full touch-target rounded-full" 
+          onClick={() => navigate('/discovery')}
+        >
+          Find More Jobs
+        </Button>
       </div>
     </div>
   );

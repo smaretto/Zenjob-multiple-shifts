@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
-import { Star, MapPin, Clock, Zap, Trophy, Users, Brain } from "lucide-react";
+import { Star, MapPin, Clock, Zap, Trophy, Users, Brain, Filter } from "lucide-react";
 import heroImage from "@/assets/hero-jobs.jpg";
 import coffeeIcon from "@/assets/coffee-shop-icon.jpg";
 import retailIcon from "@/assets/retail-icon.jpg";
@@ -97,6 +97,18 @@ export default function DiscoveryScreen() {
             </div>
           </div>
         </div>
+
+        {/* Navigation Tabs */}
+        <div className="px-4 pb-4">
+          <div className="flex gap-1 bg-primary-glow/20 p-1 rounded-full">
+            <button className="flex-1 py-2 px-4 rounded-full bg-white text-primary font-medium text-sm touch-target">
+              Flexible jobs
+            </button>
+            <button className="flex-1 py-2 px-4 rounded-full text-primary-foreground font-medium text-sm touch-target">
+              Working student jobs
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Weekly Challenge Banner */}
@@ -121,11 +133,19 @@ export default function DiscoveryScreen() {
       {/* Job Feed */}
       <div className="px-4 py-6 pb-20">
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-2">
-            <Brain className="w-5 h-5 text-primary" aria-label="AI recommendations" />
-            <h2 className="text-lg font-semibold">AI Recommendations</h2>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-primary" aria-label="AI recommendations" />
+              <div>
+                <h2 className="text-lg font-semibold">AI Recommendations</h2>
+                <p className="text-muted-foreground text-sm">Personalized multi-shift opportunities</p>
+              </div>
+            </div>
+            <Button variant="outline" size="sm" className="bg-black text-white border-black hover:bg-black/90 rounded-full touch-target">
+              <Filter className="w-4 h-4 mr-2" />
+              Filter
+            </Button>
           </div>
-          <p className="text-muted-foreground text-sm">Personalized multi-shift opportunities</p>
         </div>
 
         <div className="space-y-4">
@@ -135,9 +155,10 @@ export default function DiscoveryScreen() {
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${job.title} at ${job.company}`}>
-              {/* Header with company icon and fit score */}
+              {/* Header with earnings and fit score */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="font-bold text-lg text-foreground">€{job.totalEarnings}</div>
                   <img src={job.icon} alt={`${job.company} logo`} className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
                   <div className="min-w-0">
                     <h3 className="font-semibold text-base leading-tight">{job.title}</h3>
@@ -168,26 +189,31 @@ export default function DiscoveryScreen() {
                 </p>
               </div>
 
-              {/* Location and timing */}
-              <div className="space-y-2 mb-3">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-                  <span className="truncate">{job.location}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-                  <span className="truncate">{job.timeCommitment}</span>
-                </div>
+              {/* Location */}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                <MapPin className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                <span className="truncate">{job.location}</span>
               </div>
 
-              {/* Earnings preview */}
-              <div className="bg-success-light p-3 rounded-lg mb-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-success">Total Earnings</span>
-                  <span className="text-success font-bold text-sm">€{job.totalEarnings}</span>
+              {/* Timeline section */}
+              <div className="bg-muted/50 p-3 rounded-lg mb-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <Clock className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                  <span className="text-sm font-medium">{job.totalShifts} shifts</span>
                 </div>
-                <div className="text-xs text-success mt-1">
-                  €{job.hourlyRate}/hour × {job.totalShifts} shifts
+                <div className="space-y-2 text-sm">
+                  <div>
+                    <div className="font-medium">First shift</div>
+                    <div className="text-muted-foreground text-xs">
+                      {job.nextShiftDate === "Tomorrow" ? "Tomorrow" : `in ${Math.floor(Math.random() * 8) + 1} days`} • 7:00-11:00 AM
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-medium">Last shift</div>
+                    <div className="text-muted-foreground text-xs">
+                      {job.id === "coffee-central" ? "in 5 days" : job.id === "retail-fashion" ? "in 9 days" : "in 3 days"} • {job.id === "retail-fashion" ? "10:00-19:00 PM" : job.id === "office-admin" ? "14:00-22:00 PM" : "7:00-11:00 AM"}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -201,7 +227,7 @@ export default function DiscoveryScreen() {
                          aria-label={`Earnings streak progress: ${job.totalShifts} out of 7 days`} />
               </div>
 
-              <Button className="w-full" size="default" variant="default">
+              <Button className="w-full rounded-full" size="default" variant="default">
                 View Details • Starts {job.nextShiftDate}
               </Button>
             </Card>
@@ -210,7 +236,7 @@ export default function DiscoveryScreen() {
 
         {/* Load More */}
         <div className="text-center mt-6">
-          <Button variant="outline" size="lg" className="touch-target">
+          <Button variant="outline" size="lg" className="touch-target rounded-full">
             Show More Recommendations
           </Button>
         </div>

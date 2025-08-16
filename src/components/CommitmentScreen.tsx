@@ -71,6 +71,12 @@ export default function CommitmentScreen() {
       </div>
 
       <div className="px-4 py-6 pb-24">
+        {/* Page Header */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold mb-2">Review job details</h1>
+          <p className="text-muted-foreground">Please review the job details and make sure it works for you before applying.</p>
+        </div>
+
         <div className="space-y-6">
           {/* AI Micro-scheduling Check */}
           <Card className="p-6">
@@ -232,14 +238,9 @@ export default function CommitmentScreen() {
 
       {/* Sticky bottom buttons */}
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[375px] bg-background p-4 border-t">
-        <div className="flex gap-3">
-          <Button variant="outline" className="flex-1 touch-target" onClick={() => navigate(`/job/${id}`)}>
-            Review
-          </Button>
-          <Button className="flex-1 touch-target" size="lg" disabled={!confirmationChecked} onClick={() => navigate(`/confirmation/${id}`)}>
-            Confirm €{job.totalEarnings}
-          </Button>
-        </div>
+        <Button className="w-full touch-target rounded-full" size="lg" disabled={!confirmationChecked} onClick={() => navigate(`/confirmation/${id}`)}>
+          Submit Application
+        </Button>
       </div>
     </div>;
 }
