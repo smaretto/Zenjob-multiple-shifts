@@ -23,9 +23,28 @@ interface JobCard {
   streakBadge: string;
   timeCommitment: string;
   nextShiftDate: string;
+  isActive?: boolean;
+  completedShifts?: number;
 }
 
 const jobs: JobCard[] = [
+  {
+    id: "bookstore-active",
+    title: "Book Store Assistant",
+    company: "Pages & Coffee",
+    location: "Friedrichshain, Berlin",
+    hourlyRate: 11.5,
+    totalShifts: 6,
+    totalEarnings: 414,
+    fitScore: 95,
+    whyThisJob: "You're already doing great! 2 shifts completed, 4 more to go.",
+    icon: coffeeIcon,
+    streakBadge: "Active job",
+    timeCommitment: "Mon-Sat, 16-20 PM",
+    nextShiftDate: "Tomorrow",
+    isActive: true,
+    completedShifts: 2
+  },
   {
     id: "coffee-central",
     title: "Barista Assistant",
@@ -78,12 +97,29 @@ export default function DiscoveryScreen() {
 
   return (
     <div className="mobile-container bg-background">
+      {/* Title */}
+      <div className="px-4 pt-4 pb-2">
+        <h1 className="text-2xl font-bold text-primary">Job feed</h1>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="px-4 pb-4">
+        <div className="flex border-b border-foreground">
+          <button className="flex-1 py-3 px-4 text-foreground font-medium text-sm border-b-2 border-foreground">
+            Flexible jobs
+          </button>
+          <button className="flex-1 py-3 px-4 text-muted-foreground font-medium text-sm">
+            Working student jobs
+          </button>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="bg-primary text-primary-foreground sticky top-0 z-10">
         <div className="px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-bold">Multi-Shift Jobs</h1>
+              <h2 className="text-xl font-bold">Multi-Shift Jobs</h2>
               <p className="text-sm text-primary-glow">AI-powered recommendations</p>
             </div>
             <div className="flex items-center gap-2">
@@ -95,18 +131,6 @@ export default function DiscoveryScreen() {
                 <Trophy className="w-5 h-5 text-primary" />
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="px-4 pb-4">
-          <div className="flex gap-1 bg-primary-glow/20 p-1 rounded-full">
-            <button className="flex-1 py-2 px-4 rounded-full bg-white text-primary font-medium text-sm touch-target">
-              Flexible jobs
-            </button>
-            <button className="flex-1 py-2 px-4 rounded-full text-primary-foreground font-medium text-sm touch-target">
-              Working student jobs
-            </button>
           </div>
         </div>
       </div>
@@ -142,8 +166,8 @@ export default function DiscoveryScreen() {
               </div>
             </div>
             <Button variant="outline" size="sm" className="bg-black text-white border-black hover:bg-black/90 rounded-full touch-target">
-              <Filter className="w-4 h-4 mr-2" />
               Filter
+              <Filter className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
@@ -158,7 +182,10 @@ export default function DiscoveryScreen() {
               {/* Header with earnings and fit score */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <div className="font-bold text-lg text-foreground">€{job.totalEarnings}</div>
+                  <div>
+                    <div className="font-bold text-lg text-foreground">€{job.totalEarnings}</div>
+                    <div className="text-sm text-muted-foreground">€{job.hourlyRate}/hour</div>
+                  </div>
                   <img src={job.icon} alt={`${job.company} logo`} className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
                   <div className="min-w-0">
                     <h3 className="font-semibold text-base leading-tight">{job.title}</h3>
@@ -217,15 +244,17 @@ export default function DiscoveryScreen() {
                 </div>
               </div>
 
-              {/* Earnings Streak Preview */}
-              <div className="mb-4">
-                <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Earnings Streak</span>
-                  <span className="font-medium">Day {job.totalShifts}/7</span>
+              {/* Earnings Streak Preview - only for active jobs */}
+              {job.isActive && job.completedShifts && (
+                <div className="mb-4">
+                  <div className="flex items-center justify-between text-sm mb-2">
+                    <span className="text-muted-foreground">Earnings Streak</span>
+                    <span className="font-medium">€{(job.completedShifts * job.hourlyRate * 4).toFixed(0)} earned / €{job.totalEarnings} total</span>
+                  </div>
+                  <Progress value={(job.completedShifts / job.totalShifts) * 100} className="h-2" 
+                           aria-label={`Earnings progress: ${job.completedShifts} out of ${job.totalShifts} shifts completed`} />
                 </div>
-                <Progress value={(job.totalShifts / 7) * 100} className="h-2" 
-                         aria-label={`Earnings streak progress: ${job.totalShifts} out of 7 days`} />
-              </div>
+              )}
 
               <Button className="w-full rounded-full" size="default" variant="default">
                 View Details • Starts {job.nextShiftDate}

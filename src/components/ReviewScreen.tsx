@@ -252,7 +252,7 @@ export default function ReviewScreen() {
         <Card className="p-4 mb-6">
           <h3 className="font-semibold mb-4 flex items-center gap-2">
             <Calendar className="w-5 h-5" />
-            Your 5-Day Journey
+            Your {job.totalShifts}-{job.totalShifts === 1 ? 'Day' : job.totalShifts <= 7 ? 'Day' : 'Week'} Journey
           </h3>
           <div className="space-y-3">
             {job.shifts.map((shift, index) => <div key={index} className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
