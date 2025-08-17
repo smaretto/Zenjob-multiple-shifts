@@ -174,10 +174,13 @@ export default function DiscoveryScreen() {
 
         <div className="space-y-4">
           {jobs.map((job) => (
-            <Card key={job.id} className="job-card p-4 cursor-pointer animate-slide-up touch-target"
-                  onClick={() => navigate(`/job/${job.id}`)}
-                  role="button"
-                  tabIndex={0}
+            <Card key={job.id} className="job-card p-4 animate-slide-up touch-target"
+                  {...(!job.isActive && { 
+                    onClick: () => navigate(`/job/${job.id}`),
+                    role: "button",
+                    tabIndex: 0,
+                    style: { cursor: 'pointer' }
+                  })}
                   aria-label={`View ${job.title} at ${job.company}`}>
               {/* Header with earnings and fit score */}
               <div className="flex items-start justify-between mb-3">
@@ -230,7 +233,7 @@ export default function DiscoveryScreen() {
                 </div>
                 <div className="space-y-2 text-sm">
                   <div>
-                    <div className="font-medium">First shift</div>
+                    <div className="font-medium">{job.isActive ? "Next shift" : "First shift"}</div>
                     <div className="text-muted-foreground text-xs">
                       {job.nextShiftDate === "Tomorrow" ? "Tomorrow" : `in ${Math.floor(Math.random() * 8) + 1} days`} • 7:00-11:00 AM
                     </div>
@@ -257,7 +260,7 @@ export default function DiscoveryScreen() {
               )}
 
               <Button className="w-full rounded-full" size="default" variant="default">
-                View Details • Starts {job.nextShiftDate}
+                {job.isActive ? "See Details" : `View Details • Starts ${job.nextShiftDate}`}
               </Button>
             </Card>
           ))}
